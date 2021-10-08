@@ -16,7 +16,8 @@
               <img class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72  rounded w-full object-cover object-center mb-6" src="<%= event['image'] %>" alt="Image Size 720x400">
               <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><%= event['name'] %></h2>
               <div class="h-1 -mt-2 w-20 bg-indigo-500 rounded"></div>
-              <% if event['description'].present? %>
+              <% if event['description'].nil? %>
+                <% else %>
               <p class="mt-4 leading-relaxed text-base"><%= event['description'].html_safe %></p>
               <% end %>
               <p class="mt-4 leading-relaxed text-sm">Location: <%= event['location']['name'] %> - <%= event['location']['street_address'] %><br>
