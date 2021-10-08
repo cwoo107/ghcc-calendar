@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
     require 'net/http'
     require 'openssl'
 
-    uri = URI('https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=2021-01-01&include_image_link=true')
+    uri = URI('https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=2021-04-01&include_image_link=true')
 
     Net::HTTP.start(uri.host, uri.port,
                     :use_ssl => uri.scheme == 'https',
