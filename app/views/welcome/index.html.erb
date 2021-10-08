@@ -36,9 +36,12 @@
                 <% else %>
                   <p class="mt-4 leading-relaxed text-base"><%= event['description'].html_safe %></p>
                 <% end %>
-                <p class="mt-4 leading-relaxed text-sm">Location: <%= event['location']['name'] %> - <%= event['location']['street_address'] %><br>
-                  <%= event['location']['city'] %>, <%= event['location']['state'] %> <%= event['location']['zip'] %>
+                <% if event['description'].nil? %>
+                  <% else %>
+              <p class="mt-4 leading-relaxed text-sm">Location: <%= event['location']['name'].present? ? event['location']['name'] : '' %> - <%= event['location']['street_address'].present? ? event['location']['street_address'] : '' %><br>
+                  <%= event['location']['city'].present? ? event['location']['city'] : '' %>, <%= event['location']['state'].present? ? event['location']['state'] : '' %> <%= event['location']['name'].present? ? event['location']['zip'] : '' %>
                 </p>
+                  <% end %>
               </div>
             </div>
           <% end %>
