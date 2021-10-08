@@ -3,14 +3,14 @@ class WelcomeController < ApplicationController
     require 'net/http'
     require 'openssl'
 
-    uri = URI('https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=2021-04-01&include_image_link=true')
+    uri = URI('https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=2021-10-01&include_image_link=true')
 
     Net::HTTP.start(uri.host, uri.port,
                     :use_ssl => uri.scheme == 'https',
                     :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
 
       request = Net::HTTP::Get.new uri.request_uri
-      request.basic_auth ENV['USERNAME'], ENV['PASSWORD']
+      request.basic_auth ENV["USERNAME"], ENV["PASSWORD"]
 
       response = http.request request # Net::HTTPResponse object
 
