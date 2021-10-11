@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
-
+  before_action :allow_iframe_requests
+  def allow_iframe_requests
+    response.headers.delete('X-Frame-Options')
+  end
   # GET /events or /events.json
   def index
     if params[:public] == 'false'
