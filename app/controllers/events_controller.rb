@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     if params[:public] == 'false'
-      @events = Event.where("(event_details ->> 'end_date')::date >= :today", today: Date.today)
+      @events = Event.where("event_details ->> 'image' != ''")
                      .order(Arel.sql "(event_details ->> 'start_datetime')::date  ASC")
     elsif params[:past] == 'true'
     @events = Event.where("event_details ->> 'public_calendar_listed' = 'true'" )
