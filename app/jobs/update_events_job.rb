@@ -1,18 +1,22 @@
 class UpdateEventsJob < ApplicationJob
   queue_as :default
 
-  def perform
+  def perform(*backfill)
     require 'net/http'
     require 'openssl'
 
-    uri = URI("https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=#{Date.today.year}-#{Date.today.month}-#{Date.today.day}&include_image_link=true")
-
+    if backfill.present?
+      date = backfill[0]
+    else
+      date = "#{Date.today.year}-#{Date.today.month}-#{Date.today.day}"
+    end
+    uri = URI("https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=#{date}&include_image_link=true")
     Net::HTTP.start(uri.host, uri.port,
                     :use_ssl => uri.scheme == 'https',
                     :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
 
       request = Net::HTTP::Get.new uri.request_uri
-      request.basic_auth ENV["USERNAME"],  ENV["PASSWORD"]
+      request.basic_auth "JoshFelise",  "Jpf859675!"
 
       response = http.request request # Net::HTTPResponse object
 
