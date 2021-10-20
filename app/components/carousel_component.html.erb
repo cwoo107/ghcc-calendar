@@ -1,6 +1,6 @@
-<div id="carouselExampleCaptions" class="carousel slide  p-6 rounded-lg border mb-2" data-bs-ride="carousel" style="background-color: #eff2f6;position: fixed;
+<div id="carouselExampleCaptions" class=" carousel slide  p-6 rounded-lg border mb-2" data-bs-ride="carousel" style="background-color: #eff2f6;position: fixed;
   width: 60%;">
-  <div class="carousel-indicators">
+  <div class="carousel-indicators ">
     <% @events.each_with_index do |event, i| %>
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%= i %>" class="<%= i  == 0 ? 'active': ''%>" aria-current="<%= i  == 0 ? 'true': ''%>" aria-label="Slide <%= i %>"></button>
     <% end %>
@@ -8,14 +8,64 @@
   <div class="carousel-inner">
     <% @events.each_with_index do |event, i| %>
       <div class="carousel-item <%= i  == 0 ? 'active': ''%>" data-bs-interval="5000">
-        <img max-height="40%" class="d-block w-100" src="<%= event.event_details['image'] %>" alt="<%= event.event_details['name'] %>">
-        <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font"><%= event.event_details['recurrence_description'] %></h3>
-        <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><%= event.event_details['name'] %></h2>
-        <div class="h-1 -mt-2 w-20 bg-indigo-500 rounded"></div>
-        <% if event.event_details['description'].nil? %>
-        <% else %>
-          <p class="mt-4 leading-relaxed text-base"><%= event.event_details['description'].html_safe %></p>
-        <% end %>
+        <% if event.event_details['image'].nil? %>
+        <img max-height="40%" class="d-block w-100"
+             src="<%= i % 2 == 0 ? 'https://images.unsplash.com/photo-1581447109217-19026003eba5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80' : 'https://images.unsplash.com/photo-1610050731641-f855ccdaf3f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80' %>"
+             alt="<%= event.event_details['name'] %>">
+          <% else %>
+          <img max-height="40%" class="d-block w-100"
+               src="<%= event.event_details['image'] %>"
+               alt="<%= event.event_details['name'] %>">
+          <% end %>
+        <div class="carousel-caption d-block p-6 rounded-lg border " style="background-color: #eff2f6!important">
+          <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font"><%= event.event_details['recurrence_description'] %></h3>
+          <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><%= event.event_details['name'] %></h2>
+          <div class="h-1 -mt-2 w-20 bg-indigo-500 rounded"></div>
+          <div class="accordion accordion-flush" id="accordion<%=dom_id(event) %>-c">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-heading<%=dom_id(event) %>-c">
+                <button class="text-indigo-500 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-<%=dom_id(event) %>-c" aria-expanded="false" aria-controls="flush-<%=dom_id(event) %>-c">
+                  See Details
+                </button>
+              </h2>
+              <div id="flush-<%=dom_id(event) %>-c" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=dom_id(event) %>-c" data-bs-parent="#accordion<%=dom_id(event) %>-c">
+                <div class="accordion-body">
+                  <% if event.event_details['description'].nil? %>
+                  <% else %>
+                    <p class="mt-4 leading-relaxed text-base"><%= event.event_details['description'].html_safe %></p>
+                  <% end %>
+                  <% if event.event_details['location'].nil? %>
+                  <% else %>
+                    <p class="mt-4 leading-relaxed text-sm">Location: <%= event.event_details['location']['name'].present? ? event.event_details['location']['name'] : '' %> - <%= event.event_details['location']['street_address'].present? ? event.event_details['location']['street_address'] : '' %><br>
+                      <%= event.event_details['location']['city'].present? ? event.event_details['location']['city'] : '' %>, <%= event.event_details['location']['state'].present? ? event.event_details['location']['state'] : '' %> <%= event.event_details['location']['name'].present? ? event.event_details['location']['zip'] : '' %>
+                    </p>
+                  <% end %>
+                  <% if event.event_details['registration'].nil? %>
+                  <% else %>
+                    <% if event.event_details['registration']['forms'].nil? %>
+                    <% else %>
+                      <% if event.event_details['registration']['forms']['registration_form'][0].nil? %>
+                        <% if event.event_details['registration']['forms']['registration_form']['url'].nil? %>
+                        <% else %>
+                          <a href='<%= event.event_details['registration']['forms']['registration_form']['url'] %>'
+                             class="btn btn-small btn-info">Register</a>
+
+                        <%end %>
+                      <% else %>
+                        <% event.event_details['registration']['forms']['registration_form'].each do |e| %>
+                          <p class="mt-4 leading-relaxed text-base">
+                            <a href='<%=  e['url'] %>'
+                               class="btn btn-small btn-info">Register</a></p>
+                        <% end %>
+
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

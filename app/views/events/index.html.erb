@@ -1,16 +1,16 @@
 <section class="text-gray-600 body-font backgroundGradient">
-  <div class="container-fluid px-5 -mb-5 mx-auto max-w-7x1" >
-    <div class="flex flex-wrap w-full p-4" >
-      <div class="w-full mb-6 lg:mb-0" >
-        <%= image_tag('GHCC-Color-Logo_Events.svg', width: '50%', alt: 'Logo') %>
+  <div class="container-fluid px-5  mx-auto max-w-7x1" >
+    <div class="row p-4 mb-4" >
+      <div class="col-md-4 mb-6 lg:mb-0" >
+        <%= image_tag('GHCC-Color-Logo_Events.svg', width: '100%', alt: 'Logo') %>
       </div>
     </div>
     <div class="row overflow">
       <div class="col-md-4 overflow">
         <%= render(ListComponent.new(events: @events)) %>
       </div>
-      <div class="col-md-8" >
-        <div class="container-fluid">
+      <div class="col-md-8 " >
+        <div class="container-fluid hidden md:block">
           <%= render(CarouselComponent.new(events: @events)) %>
         </div>
       </div>

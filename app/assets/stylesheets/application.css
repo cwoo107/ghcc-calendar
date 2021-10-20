@@ -22,3 +22,8 @@
     height: 80vh;
     overflow-y: scroll;
 }
+
+.carousel-caption {
+    text-align: left !important;
+    color: #2E2F30 !important;
+}
