@@ -100,6 +100,7 @@
     <orderEntry type="library" scope="PROVIDED" name="turbolinks (v5.2.1, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="turbolinks-source (v5.2.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.4, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="view_component (v2.30.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.1.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webdrivers (v4.6.1, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webpacker (v5.4.3, RVM: ruby-3.0.0) [gem]" level="application" />
@@ -120,8 +121,11 @@
         <option value="assets" />
         <option value="benchmark" />
         <option value="channel" />
+        <option value="component" />
         <option value="controller" />
+        <option value="erb:component" />
         <option value="generator" />
+        <option value="haml:component" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -130,14 +134,19 @@
         <option value="mailer" />
         <option value="migration" />
         <option value="model" />
+        <option value="preview:component" />
         <option value="rack_profiler:install" />
         <option value="resource" />
+        <option value="rspec:component" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="slim:component" />
         <option value="stimulus" />
+        <option value="stimulus:component" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
+        <option value="test_unit:component" />
         <option value="test_unit:generator" />
         <option value="test_unit:install" />
         <option value="test_unit:mailbox" />
@@ -151,8 +160,11 @@
         <option value="assets" />
         <option value="benchmark" />
         <option value="channel" />
+        <option value="component" />
         <option value="controller" />
+        <option value="erb:component" />
         <option value="generator" />
+        <option value="haml:component" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -161,14 +173,19 @@
         <option value="mailer" />
         <option value="migration" />
         <option value="model" />
+        <option value="preview:component" />
         <option value="rack_profiler:install" />
         <option value="resource" />
+        <option value="rspec:component" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="slim:component" />
         <option value="stimulus" />
+        <option value="stimulus:component" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
+        <option value="test_unit:component" />
         <option value="test_unit:generator" />
         <option value="test_unit:install" />
         <option value="test_unit:mailbox" />
@@ -467,6 +484,7 @@
               </RakeTaskImpl>
             </subtasks>
           </RakeTaskImpl>
+          <RakeTaskImpl description="This task is called by the Heroku scheduler add-on" fullCommand="update_events" id="update_events" />
           <RakeTaskImpl description="Lists all available tasks in Webpacker" fullCommand="webpacker" id="webpacker" />
           <RakeTaskImpl id="webpacker">
             <subtasks>
@@ -523,6 +541,11 @@
           <RakeTaskImpl description="" fullCommand="tmp/cache/assets" id="tmp/cache/assets" />
           <RakeTaskImpl description="" fullCommand="tmp/pids" id="tmp/pids" />
           <RakeTaskImpl description="" fullCommand="tmp/sockets" id="tmp/sockets" />
+          <RakeTaskImpl id="view_component">
+            <subtasks>
+              <RakeTaskImpl description="" fullCommand="view_component:statsetup" id="statsetup" />
+            </subtasks>
+          </RakeTaskImpl>
         </subtasks>
       </RakeTaskImpl>
     </option>

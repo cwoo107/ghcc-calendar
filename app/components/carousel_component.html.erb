@@ -1,0 +1,30 @@
+<div id="carouselExampleCaptions" class="carousel slide  p-6 rounded-lg border mb-2" data-bs-ride="carousel" style="background-color: #eff2f6;position: fixed;
+  width: 60%;">
+  <div class="carousel-indicators">
+    <% @events.each_with_index do |event, i| %>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%= i %>" class="<%= i  == 0 ? 'active': ''%>" aria-current="<%= i  == 0 ? 'true': ''%>" aria-label="Slide <%= i %>"></button>
+    <% end %>
+  </div>
+  <div class="carousel-inner">
+    <% @events.each_with_index do |event, i| %>
+      <div class="carousel-item <%= i  == 0 ? 'active': ''%>" data-bs-interval="5000">
+        <img max-height="40%" class="d-block w-100" src="<%= event.event_details['image'] %>" alt="<%= event.event_details['name'] %>">
+        <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font"><%= event.event_details['recurrence_description'] %></h3>
+        <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><%= event.event_details['name'] %></h2>
+        <div class="h-1 -mt-2 w-20 bg-indigo-500 rounded"></div>
+        <% if event.event_details['description'].nil? %>
+        <% else %>
+          <p class="mt-4 leading-relaxed text-base"><%= event.event_details['description'].html_safe %></p>
+        <% end %>
+      </div>
+    <% end %>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>

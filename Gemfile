@@ -60,3 +60,5 @@ gem 'hotwire-rails'
 gem 'tailwindcss-rails'
 
 gem 'rexml'
+
+gem "view_component", require: "view_component/engine"

@@ -1,0 +1,53 @@
+<% @events.each do |event| %>
+  <div class="">
+    <div class=" p-6 rounded-lg border mb-2" style="background-color: #eff2f6" >
+      <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font"><%= event.event_details['recurrence_description'] %></h3>
+      <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><%= event.event_details['name'] %></h2>
+      <div class="h-1 -mt-2 w-20 bg-indigo-500 rounded"></div>
+      <div class="accordion accordion-flush" id="accordion<%=dom_id(event) %>">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-heading<%=dom_id(event) %>">
+            <button class="text-indigo-500 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-<%=dom_id(event) %>" aria-expanded="false" aria-controls="flush-<%=dom_id(event) %>">
+              See Details
+            </button>
+          </h2>
+          <div id="flush-<%=dom_id(event) %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=dom_id(event) %>" data-bs-parent="#accordion<%=dom_id(event) %>">
+            <div class="accordion-body">
+              <% if event.event_details['description'].nil? %>
+              <% else %>
+                <p class="mt-4 leading-relaxed text-base"><%= event.event_details['description'].html_safe %></p>
+              <% end %>
+              <% if event.event_details['location'].nil? %>
+              <% else %>
+                <p class="mt-4 leading-relaxed text-sm">Location: <%= event.event_details['location']['name'].present? ? event.event_details['location']['name'] : '' %> - <%= event.event_details['location']['street_address'].present? ? event.event_details['location']['street_address'] : '' %><br>
+                  <%= event.event_details['location']['city'].present? ? event.event_details['location']['city'] : '' %>, <%= event.event_details['location']['state'].present? ? event.event_details['location']['state'] : '' %> <%= event.event_details['location']['name'].present? ? event.event_details['location']['zip'] : '' %>
+                </p>
+              <% end %>
+              <% if event.event_details['registration'].nil? %>
+              <% else %>
+                <% if event.event_details['registration']['forms'].nil? %>
+                <% else %>
+                  <% if event.event_details['registration']['forms']['registration_form'][0].nil? %>
+                    <% if event.event_details['registration']['forms']['registration_form']['url'].nil? %>
+                    <% else %>
+                      <a href='<%= event.event_details['registration']['forms']['registration_form']['url'] %>'
+                         class="btn btn-small btn-info">Register</a>
+
+                    <%end %>
+                  <% else %>
+                    <% event.event_details['registration']['forms']['registration_form'].each do |e| %>
+                      <p class="mt-4 leading-relaxed text-base">
+                        <a href='<%=  e['url'] %>'
+                           class="btn btn-small btn-info">Register</a></p>
+                    <% end %>
+
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

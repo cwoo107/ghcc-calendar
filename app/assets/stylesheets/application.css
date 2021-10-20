@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+.backgroundGradient {
+    height: 100vh;
+    background: linear-gradient(150deg, #fd9e54 0%, #FB9459 25%, #F67E64 50%, #F4736A 100%);
+}
+.overflow {
+    height: 80vh;
+    overflow-y: scroll;
+}
