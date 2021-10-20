@@ -2,8 +2,13 @@
   <%= render(ListComponent.new(events: @events)) %>
 
 <% elsif params[:view] == 'slides' %>
+  <div class="container-fluid hidden md:block  p-6 rounded-lg border mb-2" style="background-color: #eff2f6;
+    ">
+    <style>
+        .carousel-item {height:90vh !important;}
+    </style>
   <%= render(CarouselComponent.new(events: @events)) %>
-
+  </div>
 <% else %>
   <section class="text-gray-600 body-font backgroundGradient">
     <div class="container-fluid px-5  mx-auto max-w-7x1" >
@@ -17,7 +22,8 @@
           <%= render(ListComponent.new(events: @events)) %>
         </div>
         <div class="col-md-8 " >
-          <div class="container-fluid hidden md:block">
+          <div class="container-fluid hidden md:block  p-6 rounded-lg border mb-2" style="background-color: #eff2f6;position: fixed;
+            width: 63%;">
             <%= render(CarouselComponent.new(events: @events)) %>
           </div>
         </div>
