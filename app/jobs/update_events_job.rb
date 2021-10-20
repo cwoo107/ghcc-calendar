@@ -16,7 +16,7 @@ class UpdateEventsJob < ApplicationJob
                     :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
 
       request = Net::HTTP::Get.new uri.request_uri
-      request.basic_auth "JoshFelise",  "Jpf859675!"
+      request.basic_auth ENV['USERNAME'],  ENV['PASSWORD']
 
       response = http.request request # Net::HTTPResponse object
 
