@@ -9,14 +9,15 @@
     <% @events.each_with_index do |event, i| %>
       <div class="carousel-item <%= i  == 0 ? 'active': ''%>" data-bs-interval="5000">
         <% if event.event_details['image'].nil? %>
-        <img max-height="40%" class="d-block w-100"
-             src="<%= i % 2 == 0 ? 'https://images.unsplash.com/photo-1581447109217-19026003eba5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80' : 'https://images.unsplash.com/photo-1610050731641-f855ccdaf3f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80' %>"
-             alt="<%= event.event_details['name'] %>">
-          <% else %>
+          <img max-height="40%" class="d-block w-100"
+               src="<%= i % 2 == 0 ? 'https://images.unsplash.com/photo-1581447109217-19026003eba5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80' : 'https://images.unsplash.com/photo-1610050731641-f855ccdaf3f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80' %>"
+               alt="<%= event.event_details['name'] %>">
+
+        <% else %>
           <img max-height="40%" class="d-block w-100"
                src="<%= event.event_details['image'] %>"
                alt="<%= event.event_details['name'] %>">
-          <% end %>
+        <% end %>
         <div class="carousel-caption d-block p-6 rounded-lg border " style="background-color: #eff2f6!important">
           <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font"><%= event.event_details['recurrence_description'] %></h3>
           <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><%= event.event_details['name'] %></h2>

@@ -1,8 +1,9 @@
 <% @events.each do |event| %>
-  <div class="">
+    <div class="">
     <div class=" p-6 rounded-lg border mb-2" style="background-color: #eff2f6" >
       <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font"><%= event.event_details['recurrence_description'] %></h3>
       <h2 class="text-lg text-gray-900 font-medium title-font mb-4"><%= event.event_details['name'] %></h2>
+      <%= event.event_details['resources'].nil? ? '' : event.event_details['resources']['resource'] %>
       <div class="h-1 -mt-2 w-20 bg-indigo-500 rounded"></div>
       <div class="accordion accordion-flush" id="accordion<%=dom_id(event) %>">
         <div class="accordion-item">
