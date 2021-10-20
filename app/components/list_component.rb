@@ -13,7 +13,7 @@ class ListComponent < ViewComponent::Base
 
         if event.event_details['resources']['resource'].class == Hash
 
-          if event.event_details['resources']['resource']['name'] == 'Featured Event'
+          if event.event_details['resources']['resource']['name'] == 'Featured Event' && event.event_details['resources']['resource']['status'] == 'Approved'
             @events.append(event)
           elsif event.event_details['resources']['resource']['name'] == 'Reoccurring Events'
             @events.append(event)
@@ -23,7 +23,7 @@ class ListComponent < ViewComponent::Base
         else
 
           event.event_details['resources']['resource'].each do |e|
-            if e['name'] == 'Featured Event'
+            if e['name'] == 'Featured Event' && e['status'] == 'Approved'
               @events.append(event)
             elsif e['name'] == 'Reoccurring Events'
               @events.append(event)
