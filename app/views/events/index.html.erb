@@ -1,5 +1,23 @@
 <% if params[:view] == 'list' %>
-  <%= render(ListComponent.new(events: @events)) %>
+  <%= turbo_frame_tag :list, src: list_events_path, loading: :lazy do %>
+    <div class="flex flex-col space-y-6">
+      <% 10.times do %>
+        <div class=" p-6 rounded-lg border mb-2" style="background-color: #eff2f6" >
+          <div class="animate-pulse flex space-x-4">
+            <!-- Avatar -->
+            <!-- Details -->
+            <div class="flex-1 space-y-4 py-1">
+              <div class="h-4 bg-gray-400 rounded w-3/4"></div>
+              <div class="space-y-2">
+                <div class="h-4 bg-gray-400 rounded"></div>
+                <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
 <% elsif params[:view] == 'slides' %>
   <div class="container-fluid hidden md:block  p-6 rounded-lg border mb-2" style="background-color: #eff2f6;
@@ -7,7 +25,14 @@
     <style>
         .carousel-item {height:90vh !important;}
     </style>
-  <%= render(CarouselComponent.new(events: @events)) %>
+    <%= turbo_frame_tag :slides, src: featured_event_slides_path, loading: :lazy do %>
+      <div class="bg-gray-400 h-96 w-full "  >
+
+      </div>
+      <div class="bg-gray-400 h-44 w-full "  >
+
+      </div>
+    <% end %>
   </div>
 <% else %>
   <section class="text-gray-600 body-font backgroundGradient">
@@ -19,12 +44,37 @@
       </div>
       <div class="row overflow">
         <div class="col-md-4 overflow">
-          <%= render(ListComponent.new(events: @events)) %>
+          <%= turbo_frame_tag :list, src: list_events_path, loading: :lazy do %>
+            <div class="flex flex-col space-y-6">
+              <% 10.times do %>
+                <div class=" p-6 rounded-lg border mb-2" style="background-color: #eff2f6" >
+                <div class="animate-pulse flex space-x-4">
+                  <!-- Avatar -->
+                  <!-- Details -->
+                  <div class="flex-1 space-y-4 py-1">
+                    <div class="h-4 bg-gray-400 rounded w-3/4"></div>
+                    <div class="space-y-2">
+                      <div class="h-4 bg-gray-400 rounded"></div>
+                      <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="col-md-8 " >
           <div class="container-fluid hidden md:block  p-6 rounded-lg border mb-2" style="background-color: #eff2f6;position: fixed;
             width: 63%;">
-            <%= render(CarouselComponent.new(events: @events)) %>
+            <%= turbo_frame_tag :slides, src: featured_event_slides_path, loading: :lazy do %>
+              <div class="bg-gray-400 h-96 w-full "  >
+
+              </div>
+              <div class="bg-gray-400 h-44 w-full "  >
+
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
