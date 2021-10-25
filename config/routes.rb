@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+    collection do
+      post 'search'
+    end
+  end
   get :list_events, to: 'events#list'
   get :featured_event_slides, to: 'events#slides'
 

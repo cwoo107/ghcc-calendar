@@ -1,4 +1,9 @@
 <% if params[:view] == 'list' %>
+  <%= form_with(url: search_events_path) do |form| %>
+    <%= form.label :query, "Search:" %>
+    <%= form.text_field :query, data: { action: "input->form-submission#search" }, class: 'form-control' %>
+  <% end %>
+  <br/>
   <%= turbo_frame_tag :list, src: list_events_path, loading: :lazy do %>
     <div class="flex flex-col space-y-6">
       <% 10.times do %>
@@ -44,6 +49,7 @@
       </div>
       <div class="row overflow">
         <div class="col-md-4 overflow">
+
           <%= turbo_frame_tag :list, src: list_events_path, loading: :lazy do %>
             <div class="flex flex-col space-y-6">
               <% 10.times do %>
