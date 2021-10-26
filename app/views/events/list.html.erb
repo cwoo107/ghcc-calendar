@@ -1,4 +1,4 @@
 
 <%= turbo_frame_tag :list do %>
-  <%= render(ListComponent.new(events: @events)) %>
+  <%= render(ListComponent.new(events: @events, month: @month)) %>
 <% end %>

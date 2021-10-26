@@ -2,9 +2,11 @@
   <%= form_with(url: search_events_path, data: { controller: 'form-submission', form_submission_target: "form" }) do |form| %>
     <%= form.label :query, "Search:", class: 'text-gray-900 font-medium title-font' %>
     <%= form.text_field :query, data: { action: "input->form-submission#search" }, class: 'form-control' %>
+    <%= form.text_field :month, class: 'form-control' %>
+
   <% end %>
   <br/>
-  <%= turbo_frame_tag :list, src: list_events_path, loading: :lazy do %>
+  <%= turbo_frame_tag :list, src: list_events_path(month: Date.today.month), loading: :lazy do %>
     <div class="flex flex-col space-y-6">
       <% 10.times do %>
         <div class=" p-6 rounded-lg border mb-2" style="background-color: #eff2f6" >
@@ -39,6 +41,9 @@
       </div>
     <% end %>
   </div>
+<% elsif params[:view] == 'cards' %>
+  <%= render(CardComponent.new(events: "e")) %>
+
 <% else %>
   <section class="text-gray-600 body-font backgroundGradient">
     <div class="container-fluid px-5  mx-auto max-w-7x1" >

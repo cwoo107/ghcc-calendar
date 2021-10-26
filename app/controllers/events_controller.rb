@@ -51,6 +51,7 @@ class EventsController < ApplicationController
   end
 
   def list
+    @month = Date.today.month
     @events = Event.where("event_details ->> 'public_calendar_listed' = 'true'" )
                    .where("(event_details ->> 'end_date')::date >= :today", today: Date.today)
                    .or(Event.where("event_details ->> 'recurrence_description' LIKE 'Every%'"))

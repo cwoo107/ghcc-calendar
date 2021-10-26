@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ListComponent < ViewComponent::Base
-  def initialize(events:)
+  def initialize(events:, month:)
+    @month = month
     @events = []
     events.each do |event|
       if event.event_details['recurrence_description'].start_with?('Every')
@@ -20,8 +21,10 @@ class ListComponent < ViewComponent::Base
             end
           end
         end
-        elsif DateTime.parse(event.event_details['end_date']).to_date >= Date.today
-        @events.append(event)
+      elsif DateTime.parse(event.event_details['end_date']).to_date >= Date.today
+        if Date.parse(event.event_details['end_date']).month == @month
+          @events.append(event)
+        end
       end
     end
   end
