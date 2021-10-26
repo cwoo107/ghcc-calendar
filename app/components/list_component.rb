@@ -22,9 +22,7 @@ class ListComponent < ViewComponent::Base
           end
         end
       elsif DateTime.parse(event.event_details['end_date']).to_date >= Date.today
-        if Date.parse(event.event_details['end_date']).month == @month
           @events.append(event)
-        end
       end
     end
   end
