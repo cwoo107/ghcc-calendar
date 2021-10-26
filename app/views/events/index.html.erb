@@ -2,7 +2,6 @@
   <%= form_with(url: search_events_path, data: { controller: 'form-submission', form_submission_target: "form" }) do |form| %>
     <%= form.label :query, "Search:", class: 'text-gray-900 font-medium title-font' %>
     <%= form.text_field :query, data: { action: "input->form-submission#search" }, class: 'form-control' %>
-    <%= form.text_field :month, class: 'form-control' %>
 
   <% end %>
   <br/>
