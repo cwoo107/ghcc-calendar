@@ -10,7 +10,7 @@ class UpdateEventsJob < ApplicationJob
     else
       date = "#{Date.today.year}-#{Date.today.month}-#{Date.today.day}"
     end
-    uri = URI("https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=#{date}&include_image_link=true")
+    uri = URI("https://goldenhills.ccbchurch.com/api.php?srv=event_profiles&modified_since=#{Date.today}&include_image_link=true")
     Net::HTTP.start(uri.host, uri.port,
                     :use_ssl => uri.scheme == 'https',
                     :verify_mode => OpenSSL::SSL::VERIFY_NONE) do |http|
