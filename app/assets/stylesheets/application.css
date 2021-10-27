@@ -28,9 +28,13 @@
     color: #2E2F30 !important;
 }
 
+.flip-container{
+    height: auto;
+    min-height: 350px;
+    min-width: 250px;
+}
+
 .flip {
-    width: 250px;
-    height: 350px;
     perspective: 600px;
     float: left;
     margin: 30px;
@@ -46,9 +50,7 @@
     transform: rotateY(180deg);
     transition: transform 0.3s;
 }
-.flip-front:hover {
-    visibility: none !important;
-}
+
 .flip-front, .flip-back {
     position: absolute;
     height: 100%;
@@ -59,5 +61,23 @@
 }
 .flip-back {
     transform: rotateY(180deg);
+    min-height: 350px;
 
+}
+
+.gallery-item {
+    scroll-snap-align: start;
+}
+.gallery {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

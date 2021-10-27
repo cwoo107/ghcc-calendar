@@ -7,3 +7,5 @@ import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 import FormSubmissionController from "./form_submission_controller"
 application.register("form-submission", FormSubmissionController)
+import SliderController from "./slider_controller"
+application.register("slider", SliderController)
